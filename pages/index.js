@@ -1,81 +1,104 @@
 
 import Head from 'next/head'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Head>
-        <title>Swaram | Business, Manpower & Events</title>
+        <title>Swaram | All-in-One Business Solutions</title>
+        <meta name="description" content="Swaram offers all-in-one business solutions, manpower services, and event management." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <header className="bg-richGreen text-white px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-3">
-          <Image src="/logo.png" alt="Swaram Logo" width={40} height={40} />
-          <h1 className="text-2xl font-playfair text-gold">Swaram</h1>
-        </div>
-        <nav className="space-x-4">
-          <a href="#about" className="text-gold font-medium">About</a>
-          <a href="#services" className="text-gold font-medium">Services</a>
-          <a href="#portfolio" className="text-gold font-medium">Portfolio</a>
-          <a href="#contact" className="text-gold font-medium">Contact</a>
-        </nav>
+
+      <header style={styles.header}>
+        <div style={styles.logo}>Swaram</div>
       </header>
 
-      <main className="bg-offwhite text-charcoal">
-        <section className="bg-richGreen text-white text-center py-16 px-4">
-          <h2 className="text-5xl font-playfair mb-4">Where Business Meets Harmony</h2>
-          <p className="text-lg max-w-2xl mx-auto mb-6">
-            Empowering businesses through unified solutions in strategy, talent, and experience.
-          </p>
-          <button className="bg-gold text-richGreen px-6 py-3 rounded font-bold text-lg hover:scale-105 transition">
-            Explore Services
-          </button>
-        </section>
+      <main style={styles.main}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          style={styles.hero}
+        >
+          <h1 style={styles.title}>Empowering Businesses with Precision</h1>
+          <p style={styles.subtitle}>All-in-One Business Solutions | Manpower Services | Event Management</p>
+        </motion.div>
 
-        <section id="about" className="py-12 px-4 text-center">
-          <h2 className="text-3xl font-semibold mb-4">About Swaram</h2>
-          <p className="max-w-3xl mx-auto">
-            Swaram is a harmony of strategy, manpower, and event excellence. With integrity and innovation at our core,
-            we serve enterprises looking to scale, optimize, and lead with purpose.
-          </p>
-        </section>
-
-        <section id="services" className="py-12 px-4 bg-white">
-          <h2 className="text-3xl text-center font-semibold mb-10">Our Services</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            <div className="bg-white border border-richGreen p-6 rounded-lg shadow-lg max-w-xs w-full">
-              <h3 className="text-xl font-bold text-richGreen mb-2">Business Solutions</h3>
-              <p>From branding to operations, we provide tailored solutions for sustainable growth.</p>
-            </div>
-            <div className="bg-white border border-richGreen p-6 rounded-lg shadow-lg max-w-xs w-full">
-              <h3 className="text-xl font-bold text-richGreen mb-2">Manpower Services</h3>
-              <p>Expert recruitment, HR support, and workforce management for growing businesses.</p>
-            </div>
-            <div className="bg-white border border-richGreen p-6 rounded-lg shadow-lg max-w-xs w-full">
-              <h3 className="text-xl font-bold text-richGreen mb-2">Event Management</h3>
-              <p>Elegant, efficient, and impactful events for corporate, cultural, and private needs.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="portfolio" className="py-12 px-4 text-center">
-          <h2 className="text-3xl font-semibold mb-4">Our Portfolio</h2>
-          <p>Case studies, client stories, and visual highlights coming soon.</p>
-        </section>
-
-        <section id="contact" className="py-12 px-4 text-center">
-          <h2 className="text-3xl font-semibold mb-4">Contact Us</h2>
-          <p>
-            Email: <a href="mailto:sriram7cool@gmail.com" className="text-richGreen font-medium">sriram7cool@gmail.com</a><br />
-            Phone: +91 90802 42595<br />
-            Location: Hosur, India 635109
-          </p>
+        <section style={styles.grid}>
+          {["Business Solutions", "Manpower Services", "Event Management"].map((service, idx) => (
+            <motion.div
+              key={idx}
+              style={styles.card}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3>{service}</h3>
+              <p>We provide expert-level {service.toLowerCase()} tailored to your needs.</p>
+            </motion.div>
+          ))}
         </section>
       </main>
 
-      <footer className="bg-charcoal text-offwhite text-center py-6">
-        <p>&copy; 2025 Swaram. All rights reserved.</p>
+      <footer style={styles.footer}>
+        <p>© {new Date().getFullYear()} Swaram. All rights reserved.</p>
       </footer>
-    </>
+    </div>
   )
+}
+
+const styles = {
+  header: {
+    background: '#006400',
+    color: 'white',
+    padding: '1rem 2rem',
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000
+  },
+  logo: {
+    fontSize: '1.5rem',
+    color: '#FFD700'
+  },
+  main: {
+    padding: '2rem',
+    textAlign: 'center'
+  },
+  hero: {
+    marginBottom: '3rem'
+  },
+  title: {
+    fontSize: '2.5rem',
+    color: '#006400'
+  },
+  subtitle: {
+    fontSize: '1.2rem',
+    color: '#333'
+  },
+  grid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '1.5rem'
+  },
+  card: {
+    flex: '1 1 300px',
+    border: '2px solid #FFD700',
+    borderRadius: '12px',
+    padding: '1.5rem',
+    background: 'white',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+    textAlign: 'left'
+  },
+  footer: {
+    marginTop: '4rem',
+    padding: '1rem',
+    background: '#006400',
+    color: '#fff'
+  }
 }
